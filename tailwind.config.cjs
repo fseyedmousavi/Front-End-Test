@@ -9,6 +9,8 @@ module.exports = {
                 background: "#efefef",
                 "base-100": "#b3b2b6",
                 error: "#e7a097",
+                "light-primary": "#2fce67",
+                accent: "#ffffff",
             },
         }, ],
     },

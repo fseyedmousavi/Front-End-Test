@@ -2,7 +2,7 @@
     import SearchIcon from "$lib/icons/SearchIcon.svelte";
 </script>
 
-<div class="relative">
+<div class="relative pb-2">
     <input
         type="search"
         placeholder="Search for Books..."
