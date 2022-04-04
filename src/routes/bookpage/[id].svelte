@@ -1,22 +1,42 @@
 <script>
+    import { page } from "$app/stores";
     import BookPageHeader from "$lib/components/BookPageHeader.svelte";
     import RatingComp from "$lib/components/RatingComp.svelte";
     import ReadingBorder from "$lib/components/ReadingBorder.svelte";
-    let book = {
-        title: "Girl",
-        author: "Edna O'Brien",
-        rate: 4.7,
-        price: 20.1,
-        img: "../girl.jpg",
-        readerCt: 6,
-        text:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    import { shoppingCart } from "$lib/stores/cart";
+    import { books } from "$lib/stores/stores";
+    import { onMount } from "svelte";
+
+    let book = {};
+    onMount(() => {
+        var temp = $page.params.id;
+        book = books[temp];
+    });
+
+    $: isInCart = () => {
+        for (let i = 0; i < $shoppingCart.length; i++) {
+            if ($shoppingCart[i].id === book.id) {
+                return true;
+            }
+        }
+        return false;
     };
+    function addToShoppingCart() {
+        if (!isInCart()) {
+            shoppingCart.increment(book);
+        } else {
+            shoppingCart.decrement(book.id);
+        }
+    }
 </script>
 
 <BookPageHeader />
 
-<img src={book.img} alt={book.title} class="h-44 w-32 rounded-xl shadow-xl mx-auto" />
+<img
+    src={book.img}
+    alt={book.title}
+    class="h-44 w-32 rounded-xl shadow-xl mx-auto"
+/>
 <div class="text-center font-bold text-4xl pt-2">{book.title}</div>
 <div class="text-center font-bold py-2">{book.author}</div>
 <div
@@ -29,10 +49,21 @@
 
 <RatingComp rate={book.rate} />
 
-<div
-    class="btn rounded-2xl m-4 btn-primary grid grid-cols-5 text-white font-bold text-2xl"
->
-    <div class="text-right col-span-2">BUY</div>
-    <div>|</div>
-    <div class="text-left col-span-2">${book.price}</div>
+<div on:click={addToShoppingCart} class="p-4">
+    
+    {#if !isInCart()}
+        <div
+            class="btn rounded-2xl btn-primary grid grid-cols-5 text-white font-bold text-2xl"
+        >
+            <div class="text-right col-span-2">BUY</div>
+            <div>|</div>
+            <div class="text-left col-span-2">${book.price}</div>
+        </div>
+    {:else}
+        <div
+            class="btn btn-outline btn-rounded-2xl btn-primary font-bold w-full"
+        >
+            Remove from Cart
+        </div>
+    {/if}
 </div>

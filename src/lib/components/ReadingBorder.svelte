@@ -8,7 +8,7 @@
     <div class="font-bold text-lg px-4 py-5 ">Reading</div>
     <div class="flex col-span-2 justify-end items-center pr-2">
         {#if book.readerCt <= 0}
-            no one yet
+            <div class="text-sm text-base-300">no one yet</div>
         {/if}
         <div class="avatar -space-x-2">
             {#if book.readerCt > 0}

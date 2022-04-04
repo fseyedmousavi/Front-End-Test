@@ -4,6 +4,7 @@
     import BookSliderHeader from "$lib/components/BookSliderHeader.svelte";
     import HomeGreeting from "$lib/components/HomeGreeting.svelte";
     import SearchBar from "$lib/components/SearchBar.svelte";
+    
 </script>
 
 <div class="pt-5" />
