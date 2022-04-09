@@ -3,14 +3,14 @@
     import BookPageHeader from "$lib/components/BookPageHeader.svelte";
     import RatingComp from "$lib/components/RatingComp.svelte";
     import ReadingBorder from "$lib/components/ReadingBorder.svelte";
+    import { books } from "$lib/stores/book";
     import { shoppingCart } from "$lib/stores/cart";
-    import { books } from "$lib/stores/stores";
     import { onMount } from "svelte";
 
     let book = {};
     onMount(() => {
         var temp = $page.params.id;
-        book = books[temp];
+        book = $books[temp];
     });
 
     $: isInCart = () => {
@@ -45,12 +45,11 @@
     {book.text}
 </div>
 
-<ReadingBorder {book} />
+<ReadingBorder book={book} />
 
-<RatingComp rate={book.rate} />
+<RatingComp book={book} />
 
 <div on:click={addToShoppingCart} class="p-4">
-    
     {#if !isInCart()}
         <div
             class="btn rounded-2xl btn-primary grid grid-cols-5 text-white font-bold text-2xl"

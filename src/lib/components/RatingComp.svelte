@@ -1,13 +1,13 @@
 <script>
     import ShoppingCartIcon from "$lib/icons/ShoppingCartIcon.svelte";
-    // import StarIcon from "$lib/icons/StarIcon.svelte";
+    import { books } from "$lib/stores/book";
 
-    export let rate = 0;
+    export let book = {};
 </script>
 
 <div class="grid grid-cols-6 items-center px-4">
     <div class="text-center">
-        <div class="text-primary font-bold text-2xl">{rate}</div>
+        <div class="text-primary font-bold text-2xl">{book.rate}</div>
         <div class="text-xs">Rating</div>
     </div>
     <div class="flex mx-auto col-span-3">
@@ -19,8 +19,11 @@
                     class="bg-yellow-500 mask mask-star-2 {no % 1 == 0
                         ? 'mask-half-2'
                         : 'mask-half-1'}"
-                    on:click={() => (rate = no)}
-                    checked={rate == no}
+                    on:click={() => {
+                        book.rate = no;
+                        books.rate(book.id, no);
+                    }}
+                    checked={book.rate == no}
                 />
             {/each}
         </div>

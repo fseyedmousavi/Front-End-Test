@@ -1,0 +1,10 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    aria-hidden="true"
+    role="img"
+    class="w-10"
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 24 24"
+    ><path fill="currentColor" d="M7 9v6h4l5 5V4l-5 5H7z" /></svg
+>

@@ -4,14 +4,14 @@
     import BookSliderHeader from "$lib/components/BookSliderHeader.svelte";
     import HomeGreeting from "$lib/components/HomeGreeting.svelte";
     import SearchBar from "$lib/components/SearchBar.svelte";
-    
+import { books } from "$lib/stores/book";
 </script>
 
 <div class="pt-5" />
 
 <div class="px-6">
     <HomeGreeting />
-    <SearchBar />
+    <SearchBar bookslist={$books}/>
 </div>
 
 <BookSlider />

@@ -7,8 +7,6 @@
     import { server_url } from "$lib/constant";
     import { selectedTab } from "$lib/stores/stores";
     import { shoppingCart } from "$lib/stores/cart";
-
-    // let $selectedTab = 0;
 </script>
 
 <div class="grid grid-cols-5 place-items-center py-5 rounded-t-3xl bg-white">
@@ -41,7 +39,7 @@
         </div>
     </a>
 
-    <a href={server_url} sveltekit:prefetch on:click={() => ($selectedTab = 3)}>
+    <a href="{server_url}/musicList" sveltekit:prefetch on:click={() => ($selectedTab = 3)}>
         <div class={$selectedTab == 3 ? "text-primary" : "text-base-200"}>
             <HeadphoneIcon />
         </div>

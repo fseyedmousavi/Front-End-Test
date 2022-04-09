@@ -1,5 +1,5 @@
 <script>
-  import { books } from "$lib/stores/stores";
+  import { books } from "$lib/stores/book";
   import { Splide, SplideSlide } from "@splidejs/svelte-splide";
   import BookItem from "./BookItem.svelte";
   import BookSliderHeader from "./BookSliderHeader.svelte";
@@ -18,13 +18,9 @@
     arrows: false,
   }}
 >
-  {#each books as book}
+  {#each $books as book}
     <SplideSlide>
-      <BookItem bind:book />
+      <BookItem book={book} />
     </SplideSlide>
   {/each}
 </Splide>
-<!-- <div class="pl-6 py-2 grid grid-cols-2">
-    
-    <BookItem book={books[1]} />
-</div> -->

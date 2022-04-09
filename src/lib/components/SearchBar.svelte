@@ -1,14 +1,14 @@
 <script>
     import { server_url } from "$lib/constant";
     import SearchIcon from "$lib/icons/SearchIcon.svelte";
-    import { books } from "$lib/stores/stores";
 
+    export let bookslist = [];
     let searchResult = [];
     let search = "";
 
     function searchBook() {
         searchResult = [];
-        books.forEach((b) => {
+        bookslist.forEach((b) => {
             var temp = b.title.toLowerCase();
             if (temp.includes(search)) {
                 searchResult.push(b);
@@ -38,7 +38,9 @@
             >
                 {#each searchResult as resu}
                     <li>
-                        <a href="{server_url}/bookpage/{resu.id}">{resu.title}</a>
+                        <a href="{server_url}/bookpage/{resu.id}"
+                            >{resu.title}</a
+                        >
                     </li>
                 {/each}
             </ul>

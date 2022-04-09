@@ -7,7 +7,7 @@ function createCart() {
         subscribe,
         increment: (item) => update((n) => {
             n.push(JSON.parse(JSON.stringify(item)));
-            localStorage.setItem("books", JSON.stringify(n));
+            localStorage.setItem("cart", JSON.stringify(n));
             return n;
         }),
         decrement: (cart_id) => update((n) => {
@@ -17,16 +17,15 @@ function createCart() {
                     break;
                 }
             }
-            localStorage.setItem("books", JSON.stringify(n));
+            localStorage.setItem("cart", JSON.stringify(n));
             return n;
         }),
         fill: (items) => {
             set(items);
-            localStorage.setItem("books", JSON.stringify(items));
         },
         clear: () => {
             set([]);
-            localStorage.setItem("books", JSON.stringify());
+            localStorage.setItem("cart", JSON.stringify());
         }
     };
 }
