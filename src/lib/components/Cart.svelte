@@ -1,29 +1,19 @@
 <script>
+    import { client } from "$lib/client";
     import { server_url } from "$lib/constant";
+    import { DeleteBookFromCart } from "$lib/graphql/mutation";
     import DeleteIcon from "$lib/icons/DeleteIcon.svelte";
-    import ShoppingCartIcon from "$lib/icons/ShoppingCartIcon.svelte";
-    import { shoppingCart } from "$lib/stores/cart";
+    // import { shoppingCart } from "$lib/stores/cart";
 
     export let book = {};
-    export let isCart = false;
+    var id = book.id;
 
-    $: isInCart = () => {
-        for (let i = 0; i < $shoppingCart.length; i++) {
-            if ($shoppingCart[i].id === book.id) {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    function addToShoppingCart() {
-        if (!isInCart()) {
-            shoppingCart.increment(book);
-        } else {
-            shoppingCart.decrement(book.id);
-        }
-        console.log(isCart);
-        console.log(isInCart);
+    async function removeFromShoppingCart() {
+        await client.request(DeleteBookFromCart, {
+            user_id: "d9d5ced4-d25f-46b5-875f-ce84d7dc8bae",
+            book_id: id,
+        });
+        
     }
 </script>
 
@@ -41,15 +31,12 @@
             </div>
         </div>
     </a>
-    <div on:click={addToShoppingCart} class="absolute bottom-4 right-4 shadow-md p-2 rounded-md">
-        {#if isCart || isInCart()}
-            <div class="text-error">
-                <DeleteIcon />
-            </div>
-        {:else if !isInCart()}
-            <div class="text-secondary">
-                <ShoppingCartIcon />
-            </div>
-        {/if}
+    <div
+        on:click={removeFromShoppingCart}
+        class="absolute bottom-4 right-4 shadow-md p-2 rounded-md"
+    >
+        <div class="text-error">
+            <DeleteIcon />
+        </div>
     </div>
 </div>

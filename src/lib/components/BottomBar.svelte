@@ -6,7 +6,18 @@
     import UserIcon from "$lib/icons/BottomBarIcons/UserIcon.svelte";
     import { server_url } from "$lib/constant";
     import { selectedTab } from "$lib/stores/stores";
-    import { shoppingCart } from "$lib/stores/cart";
+    import { onMount } from "svelte";
+    import { client } from "$lib/client";
+    import { GetCartByUserId } from "$lib/graphql/query";
+    // import { shoppingCart } from "$lib/stores/cart";
+
+    let len = 0;
+    onMount(async () => {
+        const { data } = await client.request(GetCartByUserId, {
+            user_id: "d9d5ced4-d25f-46b5-875f-ce84d7dc8bae",
+        });
+        len = data.length;
+    });
 </script>
 
 <div class="grid grid-cols-5 place-items-center py-5 rounded-t-3xl bg-white">
@@ -26,11 +37,11 @@
         on:click={() => ($selectedTab = 2)}
     >
         <div class="relative">
-            {#if $shoppingCart.length > 0}
+            {#if len > 0}
                 <div
                     class="absolute -left-1 -top-3.5 p-1 bg-primary rounded-2xl text-center text-sm font-bold"
                 >
-                    {$shoppingCart.length}
+                    {len}
                 </div>
             {/if}
             <div class={$selectedTab == 2 ? "text-primary" : "text-base-200"}>
@@ -39,7 +50,11 @@
         </div>
     </a>
 
-    <a href="{server_url}/musicList" sveltekit:prefetch on:click={() => ($selectedTab = 3)}>
+    <a
+        href="{server_url}/musicList"
+        sveltekit:prefetch
+        on:click={() => ($selectedTab = 3)}
+    >
         <div class={$selectedTab == 3 ? "text-primary" : "text-base-200"}>
             <HeadphoneIcon />
         </div>

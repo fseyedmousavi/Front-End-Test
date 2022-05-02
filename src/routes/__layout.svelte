@@ -1,8 +1,7 @@
 <script>
     import { page } from "$app/stores";
     import BottomBar from "$lib/components/BottomBar.svelte";
-    import { books } from "$lib/stores/book";
-    import { shoppingCart } from "$lib/stores/cart";
+    // import { shoppingCart } from "$lib/stores/cart";
     import { music } from "$lib/stores/music";
     import { selectedTab } from "$lib/stores/stores";
     import { onMount } from "svelte";
@@ -10,12 +9,7 @@
 
     onMount(() => {
         const items = localStorage.getItem("cart");
-        if (items !== "undefined") shoppingCart.fill(JSON.parse(items));
-        else shoppingCart.fill([]);
-
-        const book = localStorage.getItem("books");
-        if (book !== "undefined") books.fill(JSON.parse(book));
-
+        
         const musics = localStorage.getItem("musics");
         if (musics !== "undefined") music.fill(JSON.parse(items));
     });
@@ -34,8 +28,6 @@
             $selectedTab = 0;
             break;
     }
-
-    console.log($page.routeId);
 </script>
 
 {#if $page.routeId != "musicList/musicpage/[id]" && $page.routeId != "bookpage/[id]"}

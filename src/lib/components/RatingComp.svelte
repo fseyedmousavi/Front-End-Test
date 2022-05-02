@@ -1,6 +1,6 @@
 <script>
     import ShoppingCartIcon from "$lib/icons/ShoppingCartIcon.svelte";
-    import { books } from "$lib/stores/book";
+    // import { books } from "$lib/stores/book";
 
     export let book = {};
 </script>
@@ -21,7 +21,7 @@
                         : 'mask-half-1'}"
                     on:click={() => {
                         book.rate = no;
-                        books.rate(book.id, no);
+                        // books.rate(book.id, no);
                     }}
                     checked={book.rate == no}
                 />

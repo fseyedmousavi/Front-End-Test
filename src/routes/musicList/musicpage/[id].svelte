@@ -9,7 +9,6 @@
     onMount(() => {
         var temp = $page.params.id;
         song = $music[temp];
-        console.log($music);
     });
 </script>
 

@@ -31,7 +31,6 @@
 
 	function m() {
 		let temp = (song.id + 1) % $music.length;
-		console.log(temp);
 		location.replace(`${server_url}/musicList/musicpage/${temp}`);
 	}
 </script>

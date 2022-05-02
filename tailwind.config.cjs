@@ -6,6 +6,7 @@ module.exports = {
             lemonade: {
                 ...require("daisyui/src/colors/themes")["[data-theme=lemonade]"],
                 primary: "#2fce67",
+                secondary: "#d4194b",
                 background: "#efefef",
                 "base-100": "#b3b2b6",
                 error: "#e7a097",

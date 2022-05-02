@@ -1,5 +1,6 @@
 <script>
-  import { books } from "$lib/stores/book";
+  // import { books } from "$lib/stores/book";
+  export let books = [];
   import { Splide, SplideSlide } from "@splidejs/svelte-splide";
   import BookItem from "./BookItem.svelte";
   import BookSliderHeader from "./BookSliderHeader.svelte";
@@ -18,9 +19,9 @@
     arrows: false,
   }}
 >
-  {#each $books as book}
+  {#each books as book}
     <SplideSlide>
-      <BookItem book={book} />
+      <BookItem {book} />
     </SplideSlide>
   {/each}
 </Splide>
